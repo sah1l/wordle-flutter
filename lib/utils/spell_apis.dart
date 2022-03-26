@@ -1,0 +1,41 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+
+import 'package:flutter/services.dart';
+
+class SpellApis {
+  static List<String> allWords = [];
+  static List<String> commonWords = [];
+  static List<String> dailyWords = [];
+
+  setAllWords() async{
+    String words = await rootBundle.loadString('assets/words.txt');
+    allWords =  words.split("\n");
+  }
+
+  setCommonWords() async{
+    String words = await rootBundle.loadString('assets/common.txt');
+    commonWords =  words.split("\n");
+  }
+
+  setDailyWords() async{
+    String words = await rootBundle.loadString('assets/daily.txt');
+    dailyWords =  words.split("\n");
+  }
+
+  String getRandomWord(int nLetter) {
+    final List<String> words =
+        commonWords.where((element) => element.length == nLetter).toList();
+    return words[Random().nextInt(words.length)];
+  }
+
+  String getDailyWord() {
+    final DateTime startDate = DateTime(2022, 2, 9);
+    return dailyWords[DateTime.now().difference(startDate).inDays];
+  }
+
+  bool validateWord(String word) {
+    return allWords.contains(word.toLowerCase());
+  }
+}
