@@ -1,5 +1,6 @@
 import 'package:wordle/models/result_object.dart';
 import 'package:wordle/models/result_status.dart';
+import 'package:wordle/utils/data_ops.dart';
 
 class CommonUtils {
   static createShareString(int index, ResultObject obj) {
@@ -27,5 +28,13 @@ class CommonUtils {
       result += '\n';
     }
     return result;
+  }
+
+  bool isFirstTime() {
+    if(DataOperations.getDailyData().toList().isEmpty &&
+        DataOperations.getRandomData().toList().isEmpty){
+      return true;
+    }
+    return false;
   }
 }

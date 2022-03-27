@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                           if (recentDailyData.status ==
                               ResultStatus.INCOMPLETE) {
                             recentStatus = ResultStatus.INCOMPLETE;
-                          } else if (recentDailyData.endTime!.isSameDate(now)) {
+                          } else if (recentDailyData.startTime.isSameDate(now)) {
                             recentStatus = recentDailyData.status;
                             duration =
                                 DateTime(now.year, now.month, now.day + 1)
@@ -121,7 +121,11 @@ class _HomePageState extends State<HomePage> {
                                         Theme.of(context).textTheme.headline3)),
                             const SizedBox(
                                 width: 60,
-                                child: Image(image: AssetImage('assets/icon/W_512x512.png'), width: 50,)),
+                                child: Image(
+                                  image:
+                                      AssetImage('assets/icon/W_512x512.png'),
+                                  width: 50,
+                                )),
                             Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                 child: Center(
@@ -171,14 +175,23 @@ class _HomePageState extends State<HomePage> {
                                                                         context)
                                                                     .colorScheme
                                                                     .error))
-                                                        : Text(
-                                                            "New Word Available",
-                                                            style: TextStyle(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .colorScheme
-                                                                    .secondary),
-                                                          ),
+                                                        : recentStatus ==
+                                                                ResultStatus
+                                                                    .SKIPPED
+                                                            ? Text("Give up",
+                                                                style: TextStyle(
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .colorScheme
+                                                                        .error))
+                                                            : Text(
+                                                                "New Word Available",
+                                                                style: TextStyle(
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .colorScheme
+                                                                        .secondary),
+                                                              ),
                                             duration != null
                                                 ? TweenAnimationBuilder<
                                                         Duration>(

@@ -9,5 +9,7 @@ enum ResultStatus {
   @HiveField(1)
   FAILURE,
   @HiveField(2)
-  INCOMPLETE
+  INCOMPLETE,
+  @HiveField(3)
+  SKIPPED
 }

@@ -19,6 +19,8 @@ class ResultStatusAdapter extends TypeAdapter<ResultStatus> {
         return ResultStatus.FAILURE;
       case 2:
         return ResultStatus.INCOMPLETE;
+      case 3:
+        return ResultStatus.SKIPPED;
       default:
         return ResultStatus.SUCCESS;
     }
@@ -35,6 +37,9 @@ class ResultStatusAdapter extends TypeAdapter<ResultStatus> {
         break;
       case ResultStatus.INCOMPLETE:
         writer.writeByte(2);
+        break;
+      case ResultStatus.SKIPPED:
+        writer.writeByte(3);
         break;
     }
   }
