@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wordle/components/keyboard/keyboard.dart';
 import 'package:wordle/components/keyboard/layout.dart';
@@ -36,7 +35,8 @@ class _GameScreen extends State<GameScreen> {
   bool _isButtonTapped = false;
 
   @override
-  initState() {
+  void initState() {
+    super.initState();
     guessedWords = widget.getRecentData().guessedWords;
     currentIndex = widget.getRecentData().guessedWords.indexOf('');
     if (currentIndex == -1) {
@@ -55,7 +55,7 @@ class _GameScreen extends State<GameScreen> {
     }
     String cw = guessedWords![currentIndex];
     if (key == TextInputLayout.BACKSPACE) {
-      if (cw.length == 0) {
+      if (cw.isEmpty) {
         return;
       }
       cw = cw.substring(0, cw.length - 1);
@@ -104,7 +104,7 @@ class _GameScreen extends State<GameScreen> {
             backgroundColor: Theme.of(context).secondaryHeaderColor,
             content: Text(
               "Not a valid word",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
           ));
@@ -124,7 +124,7 @@ class _GameScreen extends State<GameScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          if(currentIndex < guessedWords!.length){
+          if (currentIndex < guessedWords!.length) {
             ResultObject res = widget.getRecentData();
             guessedWords![currentIndex] = '';
             res.guessedWords = guessedWords!;
@@ -144,17 +144,17 @@ class _GameScreen extends State<GameScreen> {
               if (!failed) const Spacer(),
               failed
                   ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Text("Correct word was")),
-                      Text(
-                        widget.actualWord,
-                        style: Theme.of(context).textTheme.headline6,
-                      )
-                    ],
-                  )
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text("Correct word was")),
+                        Text(
+                          widget.actualWord,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        )
+                      ],
+                    )
                   : VirtualKeyboard(
                       actualWord: widget.actualWord,
                       guessedWords:

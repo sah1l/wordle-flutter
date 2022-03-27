@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter_share/flutter_share.dart';
+import 'package:community_charts_flutter/community_charts_flutter.dart'
+    as charts;
+import 'package:share_plus/share_plus.dart';
 import 'package:wordle/models/result_object.dart';
 import 'package:wordle/models/result_status.dart';
 import 'package:collection/collection.dart';
@@ -51,7 +52,7 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
         insetPadding: EdgeInsets.zero,
         title: Center(child: Text(title)),
         content: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width - 20,
             child: ListBody(
               children: <Widget>[
@@ -157,7 +158,7 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
                         ])),
                 Text(
                   "Guess distribution",
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -176,15 +177,15 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
                                 val['value'].toString())
                       ],
                       animate: true,
-                      secondaryMeasureAxis:  charts.NumericAxisSpec(
+                      secondaryMeasureAxis: charts.NumericAxisSpec(
                           renderSpec: charts.GridlineRendererSpec(
                               labelStyle: charts.TextStyleSpec(
                                   fontSize: 10,
                                   color: charts.ColorUtil.fromDartColor(
                                       Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          ?.color ??
+                                              .textTheme
+                                              .titleMedium
+                                              ?.color ??
                                           Colors.white)))),
                       domainAxis: charts.OrdinalAxisSpec(
                           renderSpec: charts.SmallTickRendererSpec(
@@ -192,9 +193,9 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
                                   fontSize: 10,
                                   color: charts.ColorUtil.fromDartColor(
                                       Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          ?.color ??
+                                              .textTheme
+                                              .titleMedium
+                                              ?.color ??
                                           Colors.white)))),
                       primaryMeasureAxis: charts.NumericAxisSpec(
                           renderSpec: charts.GridlineRendererSpec(
@@ -203,11 +204,10 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
                                   color: charts.ColorUtil.fromDartColor(
                                       Theme.of(context)
                                               .textTheme
-                                              .subtitle1
+                                              .titleMedium
                                               ?.color ??
                                           Colors.white)))),
-                      barRendererDecorator:
-                          new charts.BarLabelDecorator<String>(),
+                      barRendererDecorator: charts.BarLabelDecorator<String>(),
                     )),
                 Center(
                     child: Row(
@@ -215,7 +215,7 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
                         children: [
                       ElevatedButton.icon(
                         onPressed: () {
-                          if (data.length > 0 &&
+                          if (data.isNotEmpty &&
                               data[data.length - 1].status !=
                                   ResultStatus.INCOMPLETE) {
                             Navigator.pushNamedAndRemoveUntil(
@@ -224,19 +224,19 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
                             Navigator.of(context).pop();
                           }
                         },
-                        icon: Icon(Icons.close),
-                        label: Text("close"),
+                        icon: const Icon(Icons.close),
+                        label: const Text("close"),
                       ),
                       if (share != null && share.isNotEmpty)
                         ElevatedButton.icon(
                           onPressed: () async {
-                            await FlutterShare.share(
-                              title: 'Wordles',
-                              text: share,
+                            await Share.share(
+                              share,
+                              subject: 'Wordles',
                             );
                           },
-                          icon: Icon(Icons.share),
-                          label: Text("share"),
+                          icon: const Icon(Icons.share),
+                          label: const Text("share"),
                         )
                     ]))
               ],

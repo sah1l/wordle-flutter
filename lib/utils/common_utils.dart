@@ -14,9 +14,9 @@ class CommonUtils {
     String actualWord = obj.actualWord;
 
     String result =
-        'Wordle #${index} ${guessedWords.indexOf(actualWord.toUpperCase()) + 1}/${guessedWords.length}\n\n';
+        'Wordle #$index ${guessedWords.indexOf(actualWord.toUpperCase()) + 1}/${guessedWords.length}\n\n';
     for (String word in guessedWords) {
-      List<int>.generate(word.length, (int index) => index).forEach((index) {
+      for (var index in List<int>.generate(word.length, (int index) => index)) {
         if (actualWord[index] == word[index]) {
           result += correct;
         } else if (actualWord.contains(word[index])) {
@@ -24,15 +24,15 @@ class CommonUtils {
         } else {
           result += incorrect;
         }
-      });
+      }
       result += '\n';
     }
     return result;
   }
 
   bool isFirstTime() {
-    if(DataOperations.getDailyData().toList().isEmpty &&
-        DataOperations.getRandomData().toList().isEmpty){
+    if (DataOperations.getDailyData().toList().isEmpty &&
+        DataOperations.getRandomData().toList().isEmpty) {
       return true;
     }
     return false;

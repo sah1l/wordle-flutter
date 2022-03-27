@@ -40,7 +40,7 @@ class _WordleRandomState extends State<WordleRandom> {
       actualWord = res.actualWord;
     }
     if (isFirstTime) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         showHelpDialog(context);
       });
     }
@@ -69,7 +69,7 @@ class _WordleRandomState extends State<WordleRandom> {
   @override
   Widget build(BuildContext context) {
     return FlutterWebFrame(
-        maximumSize: Size(700, 1000),
+        maximumSize: const Size(700, 1000),
         enabled: kIsWeb,
         builder: (context) {
           return actualWord.isEmpty

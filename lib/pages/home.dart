@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     print('called');
     _bannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       size: AdSize.banner,
       listener: BannerAdListener(
         onAdLoaded: (_) {
@@ -55,10 +55,10 @@ class _HomePageState extends State<HomePage> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: AdHelper.interstitialAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
-          this._interstitialAd = ad;
+          _interstitialAd = ad;
 
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (ad) {
@@ -104,7 +104,8 @@ class _HomePageState extends State<HomePage> {
                           if (recentDailyData.status ==
                               ResultStatus.INCOMPLETE) {
                             recentStatus = ResultStatus.INCOMPLETE;
-                          } else if (recentDailyData.startTime.isSameDate(now)) {
+                          } else if (recentDailyData.startTime
+                              .isSameDate(now)) {
                             recentStatus = recentDailyData.status;
                             duration =
                                 DateTime(now.year, now.month, now.day + 1)
@@ -117,8 +118,9 @@ class _HomePageState extends State<HomePage> {
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 10, 0, 30),
                                 child: Text("WORDLES",
-                                    style:
-                                        Theme.of(context).textTheme.headline3)),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall)),
                             const SizedBox(
                                 width: 60,
                                 child: Image(
@@ -147,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                               "DAILY PUZZLE",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline5
+                                                  .headlineSmall
                                                   ?.copyWith(
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -222,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                                                       return Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   vertical: 5),
                                                           child: Text(
                                                             'Next Puzzle: $hours:$minutes:$seconds',
@@ -268,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                                               "RANDOM PUZZLE",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline5
+                                                  .headlineSmall
                                                   ?.copyWith(
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -279,7 +281,7 @@ class _HomePageState extends State<HomePage> {
                                         )),
                                   )),
                                 ))),
-                            Spacer(),
+                            const Spacer(),
                             if (_isBannerAdReady)
                               SizedBox(
                                 width: _bannerAd.size.width.toDouble(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wordle/components/game_tile.dart';
-import 'package:collection/collection.dart';
 
 class WordRowWidget extends StatelessWidget {
   const WordRowWidget(

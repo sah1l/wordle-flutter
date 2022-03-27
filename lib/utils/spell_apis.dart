@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
-
 import 'package:flutter/services.dart';
 
 class SpellApis {
@@ -9,19 +6,19 @@ class SpellApis {
   static List<String> commonWords = [];
   static List<String> dailyWords = [];
 
-  setAllWords() async{
+  setAllWords() async {
     String words = await rootBundle.loadString('assets/words.txt');
-    allWords =  words.split("\n");
+    allWords = words.split("\n");
   }
 
-  setCommonWords() async{
+  setCommonWords() async {
     String words = await rootBundle.loadString('assets/common.txt');
-    commonWords =  words.split("\n");
+    commonWords = words.split("\n");
   }
 
-  setDailyWords() async{
+  setDailyWords() async {
     String words = await rootBundle.loadString('assets/daily.txt');
-    dailyWords =  words.split("\n");
+    dailyWords = words.split("\n");
   }
 
   String getRandomWord(int nLetter) {
@@ -30,9 +27,14 @@ class SpellApis {
     return words[Random().nextInt(words.length)];
   }
 
-  String getDailyWord() {
+  String getDailyWord({DateTime? date}) {
+    if (dailyWords.isEmpty) {
+      return "HELLO"; // Fallback safety
+    }
     final DateTime startDate = DateTime(2022, 2, 9);
-    return dailyWords[DateTime.now().difference(startDate).inDays];
+    final int difference =
+        (date ?? DateTime.now()).difference(startDate).inDays;
+    return dailyWords[difference % dailyWords.length];
   }
 
   bool validateWord(String word) {

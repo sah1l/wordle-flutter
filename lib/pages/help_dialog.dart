@@ -10,9 +10,9 @@ Future<void> showHelpDialog(context) async {
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: Row(children: const <Text>[
+              const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: Row(children: <Text>[
                     Text("Guess the word in "),
                     Text("6 tries",
                         style: TextStyle(fontWeight: FontWeight.bold))
@@ -30,13 +30,15 @@ Future<void> showHelpDialog(context) async {
               ),
               RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                       children: const [
                     TextSpan(text: "For example, let's suppose "),
                     TextSpan(
                         text: "HELLO",
                         style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextSpan(text: " is the actual word we need to guess. And we enter the below words as our guess.")
+                    TextSpan(
+                        text:
+                            " is the actual word we need to guess. And we enter the below words as our guess.")
                   ])),
               const WordRowWidget(
                 wordSubmitted: true,
@@ -45,7 +47,7 @@ Future<void> showHelpDialog(context) async {
               ),
               RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                       children: const [
                     TextSpan(text: "The letter "),
                     TextSpan(
@@ -55,7 +57,7 @@ Future<void> showHelpDialog(context) async {
                   ])),
               RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                       children: const [
                     TextSpan(text: "The letter "),
                     TextSpan(
@@ -70,7 +72,7 @@ Future<void> showHelpDialog(context) async {
               ),
               RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                       children: const [
                     TextSpan(text: "Here only one "),
                     TextSpan(
@@ -90,7 +92,7 @@ Future<void> showHelpDialog(context) async {
               ),
               RichText(
                   text: TextSpan(
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                       children: const [
                     TextSpan(text: "Here both the "),
                     TextSpan(
