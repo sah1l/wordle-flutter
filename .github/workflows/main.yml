@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Code Sentinel Review
-        uses: sah1l/code-sentinel@v1.0.1
+        uses: sah1l/code-sentinel@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
