@@ -6,9 +6,9 @@ Future<void> showSkipDialog(BuildContext context, Function onAccept) async {
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Center(child: Text('Skip this word?')),
-        content: SingleChildScrollView(
+        content: const SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[
+            children: <Widget>[
               Text('Are you sure you want to give up this round?\n'
                   'This will be counted in stats as a loss and break your winning streak.'),
             ],

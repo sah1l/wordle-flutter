@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 import 'layout.dart';
 
 class VirtualKeyboard extends StatelessWidget {
-  VirtualKeyboard({
+  const VirtualKeyboard({
     Key? key,
     required this.onTextInput,
     required this.actualWord,
