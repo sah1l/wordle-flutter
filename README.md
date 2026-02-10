@@ -3,6 +3,7 @@
 ![Flutter](https://img.shields.io/badge/Flutter-3.0%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Web-orange)
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.sahil.wordle)
 
 A modern, material-design clone of the popular Wordle game built with Flutter. This project features a classic daily puzzle mode and an unlimited random puzzle mode.
 
