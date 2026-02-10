@@ -8,17 +8,17 @@ class SpellApis {
 
   setAllWords() async {
     String words = await rootBundle.loadString('assets/words.txt');
-    allWords = words.split("\n");
+    allWords = words.split("\n").map((e) => e.trim()).toList();
   }
 
   setCommonWords() async {
     String words = await rootBundle.loadString('assets/common.txt');
-    commonWords = words.split("\n");
+    commonWords = words.split("\n").map((e) => e.trim()).toList();
   }
 
   setDailyWords() async {
     String words = await rootBundle.loadString('assets/daily.txt');
-    dailyWords = words.split("\n");
+    dailyWords = words.split("\n").map((e) => e.trim()).toList();
   }
 
   String getRandomWord(int nLetter) {

@@ -9,19 +9,18 @@ import 'package:wordle/models/result_object.dart';
 import 'package:wordle/utils/spell_apis.dart';
 import 'package:wordle/wordle_daily.dart';
 import 'package:wordle/wordle_random.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await MobileAds.instance.initialize();
   Hive.registerAdapter(ResultObjectAdapter());
   Hive.registerAdapter(ResultStatusAdapter());
   await Hive.openBox<ResultObject>(hiveDailyDataField);
   await Hive.openBox<ResultObject>(hiveRandomDataField);
   setPathUrlStrategy();
-  SpellApis().setDailyWords();
-  SpellApis().setCommonWords();
-  SpellApis().setAllWords();
+  await SpellApis().setDailyWords();
+  await SpellApis().setCommonWords();
+  await SpellApis().setAllWords();
   runApp(const MyApp());
 }
 

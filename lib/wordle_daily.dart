@@ -39,6 +39,9 @@ class _WordleDailyState extends State<WordleDaily>
     } else {
       ResultObject res = data[data.length - 1];
       actualWord = res.actualWord;
+      if (actualWord.length != 5) {
+        setActualWord();
+      }
     }
 
     if (isFirstTime) {
@@ -79,7 +82,7 @@ class _WordleDailyState extends State<WordleDaily>
               ? const SizedBox.shrink()
               : HiveListener(
                   box: Hive.box<ResultObject>(hiveDailyDataField),
-                  builder: (box) {
+                  builder: (Box box) {
                     return Scaffold(
                         appBar: AppBar(
                           title: const Text("WORDLES"),

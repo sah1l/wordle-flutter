@@ -38,6 +38,9 @@ class _WordleRandomState extends State<WordleRandom> {
     } else {
       ResultObject res = data[data.length - 1];
       actualWord = res.actualWord;
+      if (actualWord.length != 5) {
+        setActualWord();
+      }
     }
     if (isFirstTime) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -76,7 +79,7 @@ class _WordleRandomState extends State<WordleRandom> {
               ? const SizedBox.shrink()
               : HiveListener(
                   box: Hive.box<ResultObject>(hiveRandomDataField),
-                  builder: (box) {
+                  builder: (Box box) {
                     return Scaffold(
                         appBar: AppBar(
                           title: const Text("WORDLES"),

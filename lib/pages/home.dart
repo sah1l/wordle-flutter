@@ -1,17 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:hive/hive.dart';
 import 'package:wordle/models/result_object.dart';
 import 'package:wordle/models/result_status.dart';
-import 'package:wordle/utils/ad_helper.dart';
 import 'package:wordle/utils/constants.dart';
 import 'package:wordle/utils/data_ops.dart';
 import 'package:wordle/utils/extensions.dart';
 import 'package:hive_listener/hive_listener.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,66 +17,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
-  InterstitialAd? _interstitialAd;
-  bool _isInterstitialAdReady = false;
-
   @override
   void initState() {
-    print('called');
-    _bannerAd = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          print('Loaded banner ad');
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
-          _isBannerAdReady = false;
-          ad.dispose();
-        },
-      ),
-    );
-    _bannerAd.load();
-    _loadInterstitialAd();
     super.initState();
-  }
-
-  void _loadInterstitialAd() {
-    InterstitialAd.load(
-      adUnitId: AdHelper.interstitialAdUnitId,
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) {
-          _interstitialAd = ad;
-
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              Navigator.pushNamed(context, '/random');
-              _loadInterstitialAd();
-            },
-          );
-
-          _isInterstitialAdReady = true;
-        },
-        onAdFailedToLoad: (err) {
-          print('Failed to load an interstitial ad: ${err.message}');
-          _isInterstitialAdReady = false;
-        },
-      ),
-    );
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
-    _interstitialAd?.dispose();
     super.dispose();
   }
 
@@ -94,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               child: SafeArea(
                   child: HiveListener(
                       box: Hive.box<ResultObject>(hiveDailyDataField),
-                      builder: (box) {
+                      builder: (Box box) {
                         ResultObject? recentDailyData =
                             DataOperations.getRecentDailyData();
                         ResultStatus? recentStatus;
@@ -246,19 +189,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Card(
                                       child: InkWell(
                                     onTap: () {
-                                      if (_isInterstitialAdReady &&
-                                          DataOperations.getRandomData()
-                                                  .toList()
-                                                  .length >=
-                                              0 &&
-                                          Random().nextBool() &&
-                                          DataOperations.getRecentRandomData()
-                                                  .status !=
-                                              ResultStatus.INCOMPLETE) {
-                                        _interstitialAd?.show();
-                                      } else {
-                                        Navigator.pushNamed(context, '/random');
-                                      }
+                                      Navigator.pushNamed(context, '/random');
                                     },
                                     child: Padding(
                                         padding: const EdgeInsets.all(20),
@@ -282,12 +213,6 @@ class _HomePageState extends State<HomePage> {
                                   )),
                                 ))),
                             const Spacer(),
-                            if (_isBannerAdReady)
-                              SizedBox(
-                                width: _bannerAd.size.width.toDouble(),
-                                height: _bannerAd.size.height.toDouble(),
-                                child: AdWidget(ad: _bannerAd),
-                              ),
                           ],
                         );
                       })));
