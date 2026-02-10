@@ -54,13 +54,13 @@ class _GameScreen extends State<GameScreen> {
       return;
     }
     String cw = guessedWords![currentIndex];
-    if (key == TextInputLayout.BACKSPACE) {
+    if (key == TextInputLayout.backspace) {
       if (cw.isEmpty) {
         return;
       }
       cw = cw.substring(0, cw.length - 1);
       guessedWords![currentIndex] = cw;
-    } else if (key == TextInputLayout.ENTER) {
+    } else if (key == TextInputLayout.enter) {
       if (cw.length < 5) {
         return;
       } else {

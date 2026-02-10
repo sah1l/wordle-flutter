@@ -44,7 +44,7 @@ Future<void> showStatsDialog(context, String title, Function dataFn,
     map['value'] = val;
     mapData.add(map);
   });
-  print(mapData);
+
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {

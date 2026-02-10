@@ -61,10 +61,10 @@ class VirtualKeyboard extends StatelessWidget {
                                     ? Colors.grey
                                     : Theme.of(context).primaryColor,
                         onTextInput: onTextInput,
-                        flex: keys.contains(TextInputLayout.ENTER)
+                        flex: keys.contains(TextInputLayout.enter)
                             ? ([
-                                TextInputLayout.ENTER,
-                                TextInputLayout.BACKSPACE
+                                TextInputLayout.enter,
+                                TextInputLayout.backspace
                               ].contains(letter)
                                 ? 3
                                 : 2)

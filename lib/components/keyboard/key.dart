@@ -32,7 +32,7 @@ class TextKey extends StatelessWidget {
                     onTextInput.call(text);
                   },
                   child: Center(
-                    child: text == TextInputLayout.BACKSPACE
+                    child: text == TextInputLayout.backspace
                         ? const Icon(
                             Icons.backspace,
                             color: Colors.white,
@@ -44,7 +44,7 @@ class TextKey extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontSize:
-                                    text == TextInputLayout.ENTER ? 14 : 18),
+                                    text == TextInputLayout.enter ? 14 : 18),
                           ),
                   ),
                 ),
