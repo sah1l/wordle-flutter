@@ -21,6 +21,13 @@ void main() async {
   await SpellApis().setDailyWords();
   await SpellApis().setCommonWords();
   await SpellApis().setAllWords();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+      statusBarColor: Colors.transparent,
+    ),
+  );
   runApp(const MyApp());
 }
 
