@@ -84,7 +84,7 @@ jobs:
           # Calculate version code: offset of 10 + run number to ensure > 6
           VERSION_CODE=$((10 + ${{ github.run_number }}))
           echo "Building version code: $VERSION_CODE"
-          flutter build appbundle --release --build-number=$VERSION_CODE --build-name=1.2.0
+          flutter build appbundle --release --build-number=$VERSION_CODE
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
